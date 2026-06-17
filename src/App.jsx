@@ -257,9 +257,7 @@ function App() {
         <div className="hero__inner">
           <p className="hero__eyebrow">{profile.location}</p>
           <h1 className="hero__name">{profile.name}</h1>
-          <p className="hero__headline">
-            <span className="grad">{profile.headline}</span>
-          </p>
+          <p className="hero__headline">{profile.headline}</p>
           <p className="hero__tagline">{profile.tagline}</p>
           <div className="hero__cta">
             <a className="btn btn--primary" href="#contact">
