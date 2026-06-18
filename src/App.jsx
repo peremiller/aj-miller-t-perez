@@ -1,10 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 
+// Years of professional experience since December 2011 — recomputed on every load,
+// so it advances automatically each year (e.g. 14+ now, 15+ from December 2026).
+const CAREER_START_YEAR = 2011
+const CAREER_START_MONTH = 12 // December
+const now = new Date()
+const experienceYears =
+  now.getFullYear() - CAREER_START_YEAR - (now.getMonth() + 1 < CAREER_START_MONTH ? 1 : 0)
+
 const profile = {
   name: 'AJ Miller T. Perez',
   headline: 'Product & Program Leader · Engineering Quality · AI-Enabled Transformation',
   tagline:
-    "I don't treat quality as a checkpoint — I build it into the system. 14+ years turning business goals into execution frameworks that scale across engineering, product, and operations.",
+    `I don't treat quality as a checkpoint — I build it into the system. ${experienceYears}+ years turning business goals into execution frameworks that scale across engineering, product, and operations.`,
   location: 'Metro Manila, National Capital Region, Philippines',
   email: 'pjomill@gmail.com',
   phone: '+63 968 851 5632',
@@ -22,14 +30,14 @@ const navLinks = [
 ]
 
 const stats = [
-  { value: '14+', label: 'Years in QA & delivery' },
+  { value: `${experienceYears}+`, label: 'Years in QA & delivery' },
   { value: '20+', label: 'Engineers led' },
   { value: '95%', label: 'Accessibility compliance' },
   { value: '5', label: 'Industries served' },
 ]
 
 const aboutParagraphs = [
-  'I lead the delivery of complex digital products by aligning engineering quality, business outcomes, and scalable systems. Across 14+ years in Banking, Healthcare, E-Commerce, Legal, and Energy, I’ve evolved from hands-on QA into a cross-functional leader driving end-to-end execution — from strategy to release — for global clients.',
+  `I lead the delivery of complex digital products by aligning engineering quality, business outcomes, and scalable systems. Across ${experienceYears}+ years in Banking, Healthcare, E-Commerce, Legal, and Energy, I’ve evolved from hands-on QA into a cross-functional leader driving end-to-end execution — from strategy to release — for global clients.`,
   'I specialize in turning business goals into execution frameworks that scale, leading cross-functional teams across engineering, product, and operations, and driving Agile + DevOps transformations that improve speed, cost, and reliability. I embed AI quality, accessibility (CPACC), and risk-based thinking directly into the product lifecycle.',
   'Today I’m focused on Product and Program leadership roles — especially in AI, Fintech, and digital platforms — where I can drive both innovation and measurable business results.',
 ]
@@ -79,7 +87,7 @@ const jobs = [
     loc: 'Bonifacio Global City, Taguig, Philippines',
     bullets: [
       'Selected for the HTML5 multi-platform ads team among 50+ testers.',
-      'Executed mobile testing to ensure application performance across a range of devices.',
+      'Executed testing to ensure application performance across a range of mobile and tablet devices.',
     ],
   },
   {
@@ -260,10 +268,10 @@ function App() {
           <p className="hero__headline">{profile.headline}</p>
           <p className="hero__tagline">{profile.tagline}</p>
           <div className="hero__cta">
-            <a className="btn btn--primary" href="#contact">
+            <a className="btn btn--primary" href="#contact" target="_blank" rel="noreferrer">
               Get in touch
             </a>
-            <a className="btn btn--ghost" href="#experience">
+            <a className="btn btn--ghost" href="#experience" target="_blank" rel="noreferrer">
               View experience
             </a>
             <a
