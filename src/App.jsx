@@ -72,7 +72,7 @@ const jobs = [
   {
     period: 'Apr 2015 — Jul 2016',
     role: 'Software Quality Assurance Analyst',
-    company: 'Kforce Global Solutions, Inc.',
+    company: 'Kforce Global Solutions',
     loc: 'Ayala, Makati City, Philippines',
     bullets: [
       'Pioneered Visual Management Boards for infrastructure automation projects at Macquarie Bank.',
@@ -83,7 +83,7 @@ const jobs = [
   {
     period: 'Oct 2014 — Apr 2015',
     role: 'Richmedia Quality Assurance Analyst',
-    company: 'Cognizant Technology Solutions, Inc.',
+    company: 'Cognizant Technology Solutions',
     loc: 'Bonifacio Global City, Taguig, Philippines',
     bullets: [
       'Selected for the HTML5 multi-platform ads team among 50+ testers.',
@@ -93,7 +93,7 @@ const jobs = [
   {
     period: 'Sep 2011 — Aug 2014',
     role: 'Software Quality Assurance Analyst',
-    company: 'Icomteq Solutions, Inc.',
+    company: 'Icomteq Solutions',
     loc: 'Quezon City, Philippines',
     bullets: [
       'Awarded Most Outstanding Employee of the Year, 2013.',
@@ -180,7 +180,7 @@ const recognition = [
     title: 'Memberships',
     items: [
       'Project Management Institute (PMI) — Member',
-      'Philippine Society for Quality, Inc. (PSQ) — Member',
+      'Philippine Society for Quality (PSQ) — Member',
     ],
   },
 ]
