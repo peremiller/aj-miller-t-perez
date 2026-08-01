@@ -17,7 +17,7 @@ const profile = {
   email: 'pjomill@gmail.com',
   phone: '+63 968 851 5632',
   linkedin: 'https://www.linkedin.com/in/millertperez/',
-  resumeUrl: '/AJ-Miller-T-Perez-Resume.pdf',
+  resumeUrl: 'https://raw.githubusercontent.com/peremiller/aj-miller-t-perez/master/public/AJ-Miller-T-Perez-Resume.pdf',
 }
 
 const navLinks = [
