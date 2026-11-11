@@ -322,7 +322,7 @@ function App() {
         </div>
       </header>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
       <Section id="about" kicker="01 — About" title="Who I am" className="about">
         {aboutParagraphs.map((p, i) => (
           <p key={i}>{p}</p>
