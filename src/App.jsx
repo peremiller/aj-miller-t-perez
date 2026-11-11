@@ -203,6 +203,7 @@ function App() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const linksRef = useRef(null)
+  const menuButtonRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -214,7 +215,7 @@ function App() {
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const els = document.querySelectorAll('.reveal')
-    if (prefersReduced) {
+    if (prefersReduced || typeof IntersectionObserver === 'undefined') {
       els.forEach((el) => el.classList.add('visible'))
       return
     }
@@ -222,6 +223,7 @@ function App() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            entry.target.classList.remove('reveal-pending')
             entry.target.classList.add('visible')
             observer.unobserve(entry.target)
           }
@@ -229,20 +231,43 @@ function App() {
       },
       { threshold: 0.12 }
     )
-    els.forEach((el) => observer.observe(el))
+    els.forEach((el) => {
+      el.classList.add('reveal-pending')
+      observer.observe(el)
+    })
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+    const onResize = () => {
+      if (window.innerWidth > 720) setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [menuOpen])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <>
-      <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <nav aria-label="Primary navigation" className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
         <a className="nav__brand" href="#top">
           <span className="nav__mark">MP</span>
           <span className="nav__name">{profile.name}</span>
         </a>
-        <div ref={linksRef} className={`nav__links${menuOpen ? ' open' : ''}`}>
+        <div id="primary-nav-links" ref={linksRef} className={`nav__links${menuOpen ? ' open' : ''}`}>
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={closeMenu}>
               {link.label}
@@ -250,8 +275,11 @@ function App() {
           ))}
         </div>
         <button
+          ref={menuButtonRef}
           className="nav__toggle"
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-controls="primary-nav-links"
+          aria-expanded={menuOpen}
           onClick={() => setMenuOpen((o) => !o)}
         >
           <span />
@@ -268,10 +296,10 @@ function App() {
           <p className="hero__headline">{profile.headline}</p>
           <p className="hero__tagline">{profile.tagline}</p>
           <div className="hero__cta">
-            <a className="btn btn--primary" href="#contact" target="_blank" rel="noreferrer">
+            <a className="btn btn--primary" href="#contact">
               Get in touch
             </a>
-            <a className="btn btn--ghost" href="#experience" target="_blank" rel="noreferrer">
+            <a className="btn btn--ghost" href="#experience">
               View experience
             </a>
             <a
@@ -294,6 +322,7 @@ function App() {
         </div>
       </header>
 
+      <main id="main-content">
       <Section id="about" kicker="01 — About" title="Who I am" className="about">
         {aboutParagraphs.map((p, i) => (
           <p key={i}>{p}</p>
@@ -377,7 +406,7 @@ function App() {
         </div>
       </Section>
 
-      <Section id="contact" kicker="05 — Contact" title="Let's talk" className="contact">
+      <Section id="contact" kicker="06 — Contact" title="Let's talk" className="contact">
         <p className="contact__lead">
           Open to opportunities and collaborations. The fastest way to reach me:
         </p>
@@ -399,6 +428,7 @@ function App() {
         </div>
       </Section>
 
+      </main>
       <footer className="footer">
         <span>© {new Date().getFullYear()} AJ Miller T. Perez</span>
         <span className="footer__made">Built with React + Vite</span>
