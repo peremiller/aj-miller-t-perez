@@ -12,6 +12,9 @@ test('résumé opens the existing local asset without relying on a third-party U
   assert.match(source, /resumeUrl:\s*'\/AJ-Miller-T-Perez-Resume\.pdf'/)
   assert.doesNotMatch(source, /raw\.githubusercontent\.com\/peremiller\/aj-miller-t-perez/)
   assert.match(source, /href=\{profile\.resumeUrl\}/)
+  assert.match(source, /aria-label="Résumé PDF \(opens in a new tab\)"/)
+  assert.match(source, /target="_blank"/)
+  assert.match(source, /rel="noreferrer"/)
 })
 
 test('existing résumé PDF is included byte-for-byte in the production Vite build', () => {
