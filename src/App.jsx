@@ -306,6 +306,7 @@ function App() {
               className="btn btn--ghost"
               href={profile.resumeUrl}
               target="_blank"
+              aria-label="Résumé PDF (opens in a new tab)"
               rel="noreferrer"
             >
               Résumé
