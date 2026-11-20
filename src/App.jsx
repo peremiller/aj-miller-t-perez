@@ -17,7 +17,7 @@ const profile = {
   email: 'pjomill@gmail.com',
   phone: '+63 968 851 5632',
   linkedin: 'https://www.linkedin.com/in/millertperez/',
-  resumeUrl: 'https://raw.githubusercontent.com/peremiller/aj-miller-t-perez/master/public/AJ-Miller-T-Perez-Resume.pdf',
+  resumeUrl: '/AJ-Miller-T-Perez-Resume.pdf',
 }
 
 const navLinks = [
@@ -257,6 +257,13 @@ function App() {
     }
   }, [menuOpen])
 
+  useEffect(() => {
+    // On a narrow screen, opening the navigation should expose and focus its first link.
+    // The existing Escape listener restores focus to the menu toggle.
+    if (!menuOpen || window.innerWidth > 720) return
+    linksRef.current?.querySelector('a')?.focus()
+  }, [menuOpen])
+
   const closeMenu = () => setMenuOpen(false)
 
   return (
@@ -306,6 +313,7 @@ function App() {
               className="btn btn--ghost"
               href={profile.resumeUrl}
               target="_blank"
+              aria-label="Résumé PDF (opens in a new tab)"
               rel="noreferrer"
             >
               Résumé
