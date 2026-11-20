@@ -257,6 +257,13 @@ function App() {
     }
   }, [menuOpen])
 
+  useEffect(() => {
+    // On a narrow screen, opening the navigation should expose and focus its first link.
+    // The existing Escape listener restores focus to the menu toggle.
+    if (!menuOpen || window.innerWidth > 720) return
+    linksRef.current?.querySelector('a')?.focus()
+  }, [menuOpen])
+
   const closeMenu = () => setMenuOpen(false)
 
   return (
