@@ -17,6 +17,16 @@ test('résumé opens the existing local asset without relying on a third-party U
   assert.match(source, /rel="noreferrer"/)
 })
 
+test('mobile navigation moves focus into the opened menu and restores toggle focus on Escape', () => {
+  const source = read('src/App.jsx').toString('utf8')
+  assert.match(source, /aria-expanded=\{menuOpen\}/)
+  assert.match(source, /ref=\{linksRef\}/)
+  assert.match(source, /if \(!menuOpen \|\| window\.innerWidth > 720\) return/)
+  assert.match(source, /linksRef\.current\?\.querySelector\('a'\)\?\.focus\(\)/)
+  assert.match(source, /event\.key === 'Escape'/)
+  assert.match(source, /menuButtonRef\.current\?\.focus\(\)/)
+})
+
 test('existing résumé PDF is included byte-for-byte in the production Vite build', () => {
   const original = read('public/' + resumePath)
   const bundled = read('dist/' + resumePath)
